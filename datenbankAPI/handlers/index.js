@@ -1,4 +1,4 @@
-import { find,create,findById, update } from "../db/queries.js";
+import { find,create,findById, update, findUrlaubById } from "../db/queries.js";
 
 export const getAllUser = async (req, res) => {
   try {
@@ -58,3 +58,14 @@ export const updateProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
 };
 
+export const getUserUrlaub = async (req, res) => {
+  const id = req.params.id; 
+  try {
+    const user = await findUrlaubById(id);
+    return res.json({ user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+    
+  }
+};

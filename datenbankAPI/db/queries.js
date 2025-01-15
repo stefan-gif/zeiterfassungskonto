@@ -24,6 +24,18 @@ export const findById = async (id) => {
   }
 };
 
+export const findUrlaubById = async (id) => {
+  const QUERY = "SELECT Urlaubsanspruch,Urlaubgenommen,Urlaubgeplant FROM user WHERE id = ?";
+  try {
+    const client = await pool.getConnection();
+    const result = await client.query(QUERY,[id]);
+    return result[0];
+  } catch (error) {
+    console.log("Error executing query by id: ", error);
+    throw error;
+  }
+};
+
 export const create = async (title, description, price) => {
   const QUERY = "INSERT INTO products (title, description, price) VALUES (?,?,?)";
   try {
