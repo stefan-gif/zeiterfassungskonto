@@ -3,8 +3,17 @@ import React, { useState,useEffect } from 'react';
 import alleMitarbeiter from '../modules/alleMitarbeiter.js';
 import {spracheDeutsch , spracheEnglisch} from '../script/sprachen.js';
 
-function Header (){
+function Header ({ setSelectedItemId }){
   
+
+  const [selectedItemIdHeader, setSelectedItemIdHeader] = useState(null);
+  let handleMitarbeiterinfo = (event) => {
+    const selectedId = parseInt(event.target.value, 10); 
+    setSelectedItemIdHeader(selectedId);
+    setSelectedItemId(selectedId);
+  };
+  
+  let alledaten = [];
   const [user, setUser] = useState(null);
   const alleMitarbeit = new alleMitarbeiter();
 
@@ -23,9 +32,13 @@ function Header (){
   }, []);
 
   if (user && user.user && user.user.length > 0) {
-    alle
-    alleMitarbeit.update(user.user[0]);
-    
+    alledaten = [];
+    let i = 0;
+    user.user.forEach(element => {
+      alleMitarbeit.update(element);
+      alledaten = alleMitarbeit.alledaten;
+      i++;
+    });      
   }
 
   return(
@@ -36,8 +49,10 @@ function Header (){
           <button onClick={spracheDeutsch}>DE</button>
           <button onClick={spracheEnglisch}>ENG</button>
           <button >???</button>
-          <select name="mitarbeiter" >
-            {}
+          <select value={selectedItemIdHeader || ""} onChange={handleMitarbeiterinfo} name="mitarbeiter" >
+            {alledaten.map((element, index) => (
+              <option  value={element.id} key={index}>{element.nachname}, {element.vorname}</option>
+            ))}
           </select>
         </div>
       </div>
@@ -54,6 +69,7 @@ function Header (){
         </ul>
       </nav>
       <hr />
+      
     </header>
 
   );

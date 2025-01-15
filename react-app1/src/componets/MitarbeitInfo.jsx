@@ -2,13 +2,15 @@ import '../assets/Minfo.css';
 import React, { useState,useEffect } from 'react';
 import MitarbeiterDaten from '../modules/MitarbeiterDaten';
 
-function MitarbeiterInfo()
+function MitarbeiterInfo(id)
 {
   const [user, setUser] = useState(null);
   const mitarbeiterDaten = new MitarbeiterDaten();
-
-  useEffect(() => {
-    fetch('http://localhost:5000/api/v1/zeiterfassungsDB/1')
+  
+  
+  
+  useEffect(() => {    
+    fetch(`http://localhost:5000/api/v1/zeiterfassungsDB/${id.selectedItemId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -19,7 +21,7 @@ function MitarbeiterInfo()
         setUser(data);
       })
       .catch(error => console.log(error));
-  }, []);
+  }, [id.selectedItemId]);
 
   if (user && user.product && user.product.length > 0) {
     mitarbeiterDaten.update(user.product[0]);

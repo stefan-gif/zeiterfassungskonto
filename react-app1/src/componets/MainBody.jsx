@@ -5,11 +5,11 @@ import Terminal from "./Terminal";
 import Zeitkonto from "./Zeitkonto";
 import Kalender from "./Kalender";
 
-function MainBody() {
+function MainBody({selectedItemId}) {
   return (
     <div className="info-container">
       <div className="info-row">
-        <MitarbeiterInfo />
+        <MitarbeiterInfo selectedItemId={selectedItemId}/>
         <MeineAufgaben />
         <Urlaubskonto />
       </div>
