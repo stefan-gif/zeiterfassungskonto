@@ -1,0 +1,39 @@
+.headerone {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.ueberschrift {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.header-buttons {
+  display: flex;
+}
+
+.header-buttons button,
+.header-buttons a {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+.button-navi{
+  display: flex;
+  background-color: black;
+  padding: 5px;
+  gap: 5px;
+  
+}
+.navi-button {
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}

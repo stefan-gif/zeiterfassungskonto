@@ -1,0 +1,123 @@
+/* Container für alle Infofelder */
+.info-container {
+  display: flex;
+  flex-wrap: wrap; /* Damit die Felder in zwei Reihen umbrechen */
+  gap: 20px; /* Abstand zwischen den Feldern */
+  margin: 20px; /* Abstand zum Rand der Seite */
+}
+
+/* Jede Reihe von Infofeldern */
+.info-row {
+  display: flex;
+  width: 100%; /* Die gesamte Reihe soll 100% der Breite einnehmen */
+  justify-content: space-between; /* Gleichmäßiger Abstand zwischen den Feldern */
+}
+
+/* Jedes einzelne Infofeld */
+.info-item {
+  
+  padding: 20px;
+  border-radius: 8px;
+  width: 30%; /* Jedes Feld nimmt 30% der Breite ein */
+  box-sizing: border-box; /* Damit Padding und Border nicht die Breite beeinflussen */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Leichter Schatten für das Feld */
+   /* Stellt sicher, dass die Felder quadratisch bleiben */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Überschrift in den Infofeldern */
+.info-item h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+  color: #333;
+  text-align: center;
+}
+
+/* Text in den Infofeldern */
+.info-item  {
+  font-size: 1em;
+  color: #666;
+  text-align: center;
+}
+
+.profile-card {
+  background: white;
+  width: 100%;  
+  padding: 20px;
+  
+}
+.profile-card .image {
+  width: 50px;
+  height: 50px;
+  background: pink;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+.profile-card .name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+.profile-card .email {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+.profile-card .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.profile-card .label {
+  font-size: 12px;
+  color: #999;
+}
+.profile-card .value {
+  font-size: 14px;
+}
+.profile-card .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.profile-card .action {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background: #f5f5f5;
+  border-radius: 4px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.profile-card .action:hover {
+  background: #e0e0e0;
+}
+.profile-card .edit-profile {
+  background-color: gainsboro;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  
+}
+.profile-card .edit-profile a {
+  font-size: 14px;
+  text-decoration: none;
+  color: #007BFF;
+}
+.profile-card .edit-profile a:hover {
+  text-decoration: underline;
+}
+

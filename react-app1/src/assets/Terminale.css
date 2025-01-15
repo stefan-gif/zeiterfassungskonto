@@ -1,0 +1,134 @@
+.terminal {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.time {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.date-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 60%;
+}
+
+.date {
+  font-size: 14px;
+  color: #666;
+  
+}
+
+.status-indicator {
+  font-size: 14px;
+  font-weight: bold;
+  color: green; /* Alternativ: red für "abwesend" */
+}
+
+.icons {  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.additional-options {
+  margin-bottom: 10px;
+}
+
+.additional-options select {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.control-btn {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  width: 33%;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.control-btn:hover {
+  background-color: #0056b3;
+}
+
+.footer {
+  background-color: gainsboro;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.footer-link{
+  font-size: 14px;
+  text-decoration: none;
+  color: #007BFF;
+}
+
+.additional-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.extra-btn {
+  
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.icon-btn-container {
+  display: flex;
+  
+  gap: 10px; 
+  
+}
+.anwesend-balken{
+  background-color: green;
+  padding: 5px;
+  padding-bottom: 50px;
+}
+.Ueberschrift { 
+  width: 100%;
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+}
+.abwesendrot{
+  background-color: red; 
+}
+
