@@ -37,6 +37,7 @@
   margin-bottom: 2%;
   max-height: 300px;
   overflow-y: auto;
+  position: relative;
 }
 
 .Aufgabenlist{
@@ -55,4 +56,16 @@
   font-size: 14px;
   text-decoration: none;
   color: #007BFF;
+}
+
+.removeButton {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
