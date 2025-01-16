@@ -1,25 +1,51 @@
+import { useEffect, useState } from 'react';
 import '../assets/MeinUrlaubskonto.css';
-import urlaubsinfo from '../script/urlaubsinfo';
 import 'js-circle-progress';
+import UrlaubsDaten from '../modules/Urlaubsdaten';
 
-function Urlaubskonto()
+function Urlaubskonto(id)
 { 
-  const restUrlaub = urlaubsinfo.Urlaubsanspruch-urlaubsinfo.UrlaubGenommen-urlaubsinfo.UrlaubGeplant;
+  let urlaubsDaten = new UrlaubsDaten();
+  let [urlaubsinfo, setUrlaubsinfo] = useState(null);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/v1/zeiterfassungsDB/urlaub/${id.selectedItemId}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json()
+    })
+      .then(data => {
+        console.log(data);
+        setUrlaubsinfo(data);        
+    })
+    .catch(error => console.log(error));
+  }, [id.selectedItemId]);
+    
+  if (urlaubsinfo && urlaubsinfo.urlaub && urlaubsinfo.urlaub.length > 0) {
+    urlaubsDaten = new UrlaubsDaten();    
+    urlaubsDaten.update(urlaubsinfo.urlaub[0]);
+  }
   return(
     <div className="info-item">
       <div className="urlaubskonto-card">
     <h3 className='js-sprache'>Mein Urlaubskonto</h3>
     <div className="urlaubs-tage">
     <div className="urlaubskonto-details">
-        <p className='js-sprache'>Urlaubsanspruch: <strong>{urlaubsinfo.Urlaubsanspruch}</strong></p>
-        <p className='js-sprache'>Urlaub genommen: <strong>{urlaubsinfo.UrlaubGenommen}</strong></p>
-        <p className='js-sprache'>Urlaub geplant: <strong>{urlaubsinfo.UrlaubGeplant}</strong></p>
-        <p className='js-sprache'>Resturlaub (inkl. Planung): <strong>{restUrlaub}</strong></p>
+        <p className='js-sprache'>Urlaubsanspruch: 
+          <strong>{urlaubsDaten.Urlaubsanspruch}</strong></p>
+        <p className='js-sprache'>Urlaub genommen: 
+          <strong>{urlaubsDaten.Urlaubgenommen}</strong></p>
+        <p className='js-sprache'>Urlaub geplant: 
+          <strong>{urlaubsDaten.Urlaubgeplant}</strong></p>
+        <p className='js-sprache'>Resturlaub (inkl. Planung): 
+          <strong>{urlaubsDaten.resturlaubBerechnen()}</strong></p>
     </div>
 
     <div className="urlaubskonto-circle">
         
-        <circle-progress text-format='value' value={restUrlaub} max={urlaubsinfo.Urlaubsanspruch}></circle-progress>
+        <circle-progress text-format='value' value="12" max="30"></circle-progress>
             
     </div>
   </div>

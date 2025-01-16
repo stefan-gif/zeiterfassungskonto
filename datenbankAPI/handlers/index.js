@@ -61,8 +61,8 @@ export const deleteProduct = async (req, res) => {
 export const getUserUrlaub = async (req, res) => {
   const id = req.params.id; 
   try {
-    const user = await findUrlaubById(id);
-    return res.json({ user });
+    const urlaub = await findUrlaubById(id);
+    return res.json({ urlaub });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Internal server error" });

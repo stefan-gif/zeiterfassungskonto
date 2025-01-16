@@ -4,8 +4,8 @@ import MitarbeiterDaten from '../modules/MitarbeiterDaten';
 
 function MitarbeiterInfo(id)
 {
-  const [user, setUser] = useState(null);
-  const mitarbeiterDaten = new MitarbeiterDaten();
+  let [user, setUser] = useState(null);
+  let mitarbeiterDaten = new MitarbeiterDaten();
   
   
   

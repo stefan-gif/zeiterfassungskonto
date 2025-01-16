@@ -11,7 +11,7 @@ function MainBody({selectedItemId}) {
       <div className="info-row">
         <MitarbeiterInfo selectedItemId={selectedItemId}/>
         <MeineAufgaben />
-        <Urlaubskonto />
+        <Urlaubskonto selectedItemId={selectedItemId} />
       </div>
 
       <div className="info-row">

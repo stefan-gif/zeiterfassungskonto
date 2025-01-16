@@ -1,4 +1,4 @@
-import { pool } from "./index.js";
+import {pool}  from './index.js'; // Make sure to import your pool correctly
 
 export const find = async () => {
   const QUERY = "SELECT id,nachname,vorname FROM user";
@@ -14,25 +14,32 @@ export const find = async () => {
 
 export const findById = async (id) => {
   const QUERY = "SELECT * FROM user WHERE id = ?";
+  let client;
   try {
-    const client = await pool.getConnection();
-    const result = await client.query(QUERY,[id]);
+    client = await pool.getConnection();
+    const result = await client.query(QUERY, [id]);
+    console.log(result[0]);
     return result[0];
   } catch (error) {
     console.log("Error executing query by id: ", error);
     throw error;
+  } finally {
+    if (client) client.release(); // Release the connection back to the pool
   }
 };
 
 export const findUrlaubById = async (id) => {
-  const QUERY = "SELECT Urlaubsanspruch,Urlaubgenommen,Urlaubgeplant FROM user WHERE id = ?";
+  const QUERY = "SELECT Urlaubsanspruch, Urlaubgenommen, Urlaubgeplant FROM user WHERE id = ?";
+  let client;
   try {
-    const client = await pool.getConnection();
-    const result = await client.query(QUERY,[id]);
+    client = await pool.getConnection();
+    const result = await client.query(QUERY, [id]);
     return result[0];
   } catch (error) {
     console.log("Error executing query by id: ", error);
     throw error;
+  } finally {
+    if (client) client.release(); // Release the connection back to the pool
   }
 };
 

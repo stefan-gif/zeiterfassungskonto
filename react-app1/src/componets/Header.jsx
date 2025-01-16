@@ -26,6 +26,7 @@ function Header ({ setSelectedItemId }){
         return response.json();
       })
       .then(data => {
+        console.log("test");
         setUser(data);
       })
       .catch(error => console.log(error));
