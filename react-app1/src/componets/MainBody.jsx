@@ -10,7 +10,7 @@ function MainBody({selectedItemId}) {
     <div className="info-container">
       <div className="info-row">
         <MitarbeiterInfo selectedItemId={selectedItemId}/>
-        <MeineAufgaben />
+        <MeineAufgaben selectedItemId={selectedItemId}/>
         <Urlaubskonto selectedItemId={selectedItemId} />
       </div>
 

@@ -1,4 +1,4 @@
-import { find,create,findById, update, findUrlaubById } from "../db/queries.js";
+import { find,create,findById, update, findUrlaubById, findAufgabeById } from "../db/queries.js";
 
 export const getAllUser = async (req, res) => {
   try {
@@ -68,4 +68,16 @@ export const getUserUrlaub = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
     
   }
+};
+
+export const getAufgaben = async (req, res) => {
+  const id = req.params.id;
+try {
+  const aufgaben = await findAufgabeById(id);
+  return res.status(200).json([aufgaben]);
+
+} catch (error) {
+  console.log(error);
+  res.status(500).json({ message: "Internal server error" });
+}
 };

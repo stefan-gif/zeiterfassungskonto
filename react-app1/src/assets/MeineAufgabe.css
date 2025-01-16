@@ -28,12 +28,19 @@
 
 .aufgabenliste {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 80%;
-  height: 60%;
+  height: 300px;
   background-color: pink;
   margin-bottom: 2%;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.Aufgabenlist{
+  margin-bottom: 10px;
 }
 
 .actions-meine-aufgaben {

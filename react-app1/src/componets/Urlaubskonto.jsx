@@ -17,7 +17,6 @@ function Urlaubskonto(id)
       return response.json()
     })
       .then(data => {
-        console.log(data);
         setUrlaubsinfo(data);        
     })
     .catch(error => console.log(error));
@@ -45,7 +44,7 @@ function Urlaubskonto(id)
 
     <div className="urlaubskonto-circle">
         
-        <circle-progress text-format='value' value="12" max="30"></circle-progress>
+        <circle-progress text-format='value' value={urlaubsDaten.resturlaubBerechnen()} max={urlaubsDaten.Urlaubsanspruch}></circle-progress>
             
     </div>
   </div>
