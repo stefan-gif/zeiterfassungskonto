@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import '../assets/MeineAufgabe.css'
 import AufgabenDaten from '../modules/AufgabenNutzer';
 
-function AufgabenListe(id)
+function AufgabenListe({selectedItemId})
 {
   const aufgabenDaten = new AufgabenDaten();
+  const [change,setChange] = useState(false);
   const [previousAufgaben, setPreviousAufgaben] = useState([]);
   const [showbutton, setShowbutton] = useState(false);
   const [aufgaben, setAufgaben] = useState();
+
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/zeiterfassungsDB/aufgaben/${id.selectedItemId}`)
+    fetch(`http://localhost:5000/api/v1/zeiterfassungsDB/aufgabendaten/${selectedItemId}`)
     .then(response => { 
       if (!response.ok) { 
         throw new Error("Network response was not ok"); 
@@ -17,25 +19,33 @@ function AufgabenListe(id)
       return response.json()
     })
       .then(data => {
-        
         setAufgaben(data);
     })
     .catch(error => console.log(error));
-  }, [id.selectedItemId]);
+  }, [selectedItemId, change]);
   
   if (aufgaben && aufgaben.length > 0) {
+    
     if(typeof aufgaben[0] === "string")
-      {
-        aufgabenDaten.update(aufgaben);
-      }else aufgabenDaten.update(aufgaben[0]);
+      {                
+        aufgabenDaten.update(aufgaben);        
+      }else aufgabenDaten.update(aufgaben[0]); 
+
   }
   
-  function deleteAufgabe(e) {
-    const index = e.target.getAttribute('value');
-    setPreviousAufgaben([...aufgabenDaten.Aufgaben]);
-    aufgabenDaten.Aufgaben.splice(index, 1);    
-    setAufgaben([aufgabenDaten.Aufgaben]);  
+  async function deleteAufgabe(e) {
+    const index = e.target.dataset.index;
+    setPreviousAufgaben([...aufgabenDaten.Aufgaben]);    
+    const aufgabeNeu = [...aufgabenDaten.Aufgaben];    
+    aufgabeNeu.splice(index, 1);
+    setAufgaben([...aufgabeNeu]);
     setShowbutton(true);
+    try {
+      await aufgabenDaten.deleteAufgabe(index);
+      setChange(!change);
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
   }
 
   function setback() {
@@ -45,11 +55,11 @@ function AufgabenListe(id)
 
   return(
 
-    <div className="aufgabenliste" style={{ maxHeight: '300px', overflowY: 'auto' }}>
+    <div className="aufgabenliste" >
           <ul>
             {aufgabenDaten.Aufgaben.map((todo, index) => (               
               <li  className='Aufgabenlist'
-              key={index} onClick={deleteAufgabe} value={index} >{index+1}. {todo}</li>              
+              key={index} onClick={deleteAufgabe} data-index={index} >{index+1}. {todo}</li>              
             ))}
             <li>
               <input 

@@ -1,4 +1,4 @@
-import { find,create,findById, update, findUrlaubById, findAufgabeById } from "../db/queries.js";
+import { find,create,findById, update, findUrlaubById, findAufgabeById, findAufgabenDatenById,deleteAufgabe } from "../db/queries.js";
 
 export const getAllUser = async (req, res) => {
   try {
@@ -55,7 +55,16 @@ export const updateProduct = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-export const deleteProduct = async (req, res) => {
+export const deletetask = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const aufgaben = await deleteAufgabe(id);
+    return res.status(200).json([aufgaben]);
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 export const getUserUrlaub = async (req, res) => {
@@ -74,6 +83,18 @@ export const getAufgaben = async (req, res) => {
   const id = req.params.id;
 try {
   const aufgaben = await findAufgabeById(id);
+  return res.status(200).json([aufgaben]);
+
+} catch (error) {
+  console.log(error);
+  res.status(500).json({ message: "Internal server error" });
+}
+};
+
+export const getAufgabenDaten = async (req, res) => {
+  const id = req.params.id;
+try {
+  const aufgaben = await findAufgabenDatenById(id);
   return res.status(200).json([aufgaben]);
 
 } catch (error) {

@@ -15,7 +15,7 @@ function Zeitkonto()
         </div>
         <div className="zeitkonto">
           <p className='js-sprache'>Saldo</p><p>{zeitkonto.Saldo} h</p>
-        </div>
+        </div>        
       </div>
   );
 }

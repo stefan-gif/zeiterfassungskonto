@@ -66,12 +66,11 @@ export const update = async (title, description, price,id) => {
   }
 };
 
-export const deleteProduct = async (id) => {
-  const QUERY = "delete from products where id = ?";
+export const deleteAufgabe = async (id) => {
+  const QUERY = "delete from aufgaben where id = ?";
   try {
     const client = await pool.getConnection();
-    const result = await client.query(QUERY,[title, description, price,id]);
-    return result[0];
+    await client.query(QUERY,id);   
   } catch (error) {
     console.log("Error executing create querry: ", error);
     throw error;
@@ -80,6 +79,21 @@ export const deleteProduct = async (id) => {
 
 export const findAufgabeById = async (nutzer_id) => {
   const QUERY = "SELECT aufgabe FROM aufgaben WHERE nutzer_id = ?";
+  let client;
+  try {
+    client = await pool.getConnection();
+    const result = await client.query(QUERY, [nutzer_id]);
+    return result[0];
+  } catch (error) {
+    console.log("Error executing query by id: ", error);
+    throw error;
+  } finally {
+    if (client) client.release(); 
+  }
+};
+
+export const findAufgabenDatenById = async (nutzer_id) => {
+  const QUERY = "SELECT id,aufgabe FROM aufgaben WHERE nutzer_id = ?";
   let client;
   try {
     client = await pool.getConnection();
