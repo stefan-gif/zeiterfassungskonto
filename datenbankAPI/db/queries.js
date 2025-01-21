@@ -42,15 +42,18 @@ export const findUrlaubById = async (id) => {
   }
 };
 
-export const create = async (title, description, price) => {
-  const QUERY = "INSERT INTO products (title, description, price) VALUES (?,?,?)";
+export const createAufgabe = async (nutzer_id, aufgabe) => {
+  const QUERY = "INSERT INTO aufgaben (nutzer_id, aufgabe) VALUES (?,?)";
+  let client;
   try {
-    const client = await pool.getConnection();
-    const result = await client.query(QUERY,[title, description, price]);
+    client = await pool.getConnection();
+    const result = await client.query(QUERY,[nutzer_id, aufgabe]);
     return result;
   } catch (error) {
     console.log("Error executing create querry: ", error);
     throw error;
+  } finally {
+    if (client) client.release();
   }
 };
 

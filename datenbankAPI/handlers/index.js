@@ -1,4 +1,4 @@
-import { find,create,findById, update, findUrlaubById, findAufgabeById, findAufgabenDatenById,deleteAufgabe } from "../db/queries.js";
+import { find,createAufgabe,findById, update, findUrlaubById, findAufgabeById, findAufgabenDatenById,deleteAufgabe } from "../db/queries.js";
 
 export const getAllUser = async (req, res) => {
   try {
@@ -21,16 +21,16 @@ export const getUser = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-export const creatProduct = async (req, res) => {
-  const { title, description, price } = req.body;
+export const creatAufgaben = async (req, res) => {
+  const { nutzer_id,aufgabe } = req.body;
 
-  if(!title || !description || !price){
+  if(!nutzer_id || !aufgabe){
     return res.status(400).json({ message: "All fields are required" });
   }
 
   try { 
-    const product = await create(title, description, price);
-    return res.status(201).json({ product });
+    const product = await createAufgabe(nutzer_id,aufgabe);
+    return res.status(201).json({ aufgabe });
     
   } catch (error) {
     console.log(error);
