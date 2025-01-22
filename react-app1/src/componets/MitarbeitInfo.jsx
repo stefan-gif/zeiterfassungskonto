@@ -1,6 +1,7 @@
 import '../assets/Minfo.css';
 import React, { useState, useEffect } from 'react';
 import MitarbeiterDaten from '../modules/MitarbeiterDaten';
+import { Link, NavLink } from 'react-router-dom';
 
 function MitarbeiterInfo({selectedItemId})
 { 
@@ -51,7 +52,7 @@ function MitarbeiterInfo({selectedItemId})
         </div>
 
         <div className="edit-profile">
-            <a href="#" className='js-sprache'>Profil bearbeiten</a>
+            <NavLink className="js-sprache" to="/mitarbeiter">Profil bearbeiten</NavLink>
         </div>
       </div>
     </div>

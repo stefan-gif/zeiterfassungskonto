@@ -2,6 +2,7 @@ import '../assets/header.css';
 import React, { useState,useEffect } from 'react';
 import alleMitarbeiter from '../modules/alleMitarbeiter.js';
 import {spracheDeutsch , spracheEnglisch} from '../script/sprachen.js';
+import { Link } from 'react-router-dom';
 
 function Header ({ setSelectedItemId }){
   
@@ -59,13 +60,27 @@ function Header ({ setSelectedItemId }){
       
       <nav>
         <ul className="button-navi">
-          <button className='navi-button js-sprache'>Startseite</button>
-          <button className='navi-button js-sprache'>Mitarbeiter</button>
-          <button className='navi-button js-sprache'>Zeit</button>
-          <button className='navi-button js-sprache'>Anwesenheitsdisplay</button>
-          <button className='navi-button js-sprache'>Kalender</button>
-          <button className='navi-button js-sprache'>Ampelkonto</button>
-          <button className='navi-button js-sprache'>Zeierfassung</button>
+          <Link to='/'>
+            <button className='navi-button js-sprache'>Startseite</button>
+          </Link>
+          <Link to='/mitarbeiter'>
+            <button className='navi-button js-sprache'>Mitarbeiter</button>
+          </Link>
+          <Link to='/zeit'>
+            <button className='navi-button js-sprache'>Zeit</button>
+          </Link>
+          <Link to='/anwesenheit'>
+            <button className='navi-button js-sprache'>Anwesenheit</button>
+          </Link>
+          <Link to='/kalender'>
+            <button className='navi-button js-sprache'>Kalender</button>
+          </Link>
+          <Link to='/ampelkonto'>
+            <button className='navi-button js-sprache'>Ampelkonto</button>
+          </Link>
+          <Link to='/terminal'>
+            <button className='navi-button js-sprache'>Terminal</button>
+          </Link>
         </ul>
       </nav>
       <hr />
