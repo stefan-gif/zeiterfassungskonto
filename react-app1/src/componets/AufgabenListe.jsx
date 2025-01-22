@@ -49,6 +49,12 @@ function AufgabenListe({selectedItemId})
   }
 
   function setback() {
+    console.log(previousAufgaben[previousAufgaben.length-1]);
+    const body = {
+      nutzer_id: selectedItemId,
+      aufgabe: previousAufgaben[previousAufgaben.length-1]
+    };
+    aufgabenDaten.createAufgabe(body);
     setAufgaben(previousAufgaben);
     setShowbutton(false);
   }
@@ -67,6 +73,11 @@ function AufgabenListe({selectedItemId})
                 placeholder="Neue Aufgabe hinzufügen" 
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && e.target.value.trim() !== '') {
+                   const body = {
+                    nutzer_id : selectedItemId,
+                    aufgabe: e.target.value.trim()
+                   };
+                   aufgabenDaten.createAufgabe(body);
                    aufgabenDaten.Aufgaben.push(e.target.value.trim());
                    setAufgaben([aufgabenDaten.Aufgaben]);
                    e.target.value = '';

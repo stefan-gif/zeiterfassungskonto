@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 class AufgabenNutzer {
   constructor() {
     this.speicher = [];
@@ -25,7 +27,7 @@ class AufgabenNutzer {
   getspeicher() {
     return this.speicher;
   }
-  
+
   async deleteAufgabe(index){        
     
     index = this.id[index];    
@@ -41,6 +43,17 @@ class AufgabenNutzer {
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
+  }
+
+  async createAufgabe(body){
+
+    try{
+      axios.post('http://localhost:5000/api/v1/zeiterfassungsDB/create', body)
+      .then(response => console.log(response));  
+    } catch (error){
+      console.error ('error with the post: ', error);
+    }
+       
   }
 }
 
