@@ -1,16 +1,14 @@
 import '../assets/Minfo.css';
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import MitarbeiterDaten from '../modules/MitarbeiterDaten';
 
-function MitarbeiterInfo(id)
-{
+function MitarbeiterInfo({selectedItemId})
+{ 
+ 
   let [user, setUser] = useState(null);
-  let mitarbeiterDaten = new MitarbeiterDaten();
-  
-  
-  
+  let mitarbeiterDaten = new MitarbeiterDaten();  
   useEffect(() => {    
-    fetch(`http://localhost:5000/api/v1/zeiterfassungsDB/${id.selectedItemId}`)
+    fetch(`${import.meta.env.VITE_Api_Server}/api/v1/zeiterfassungsDB/${selectedItemId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -21,7 +19,7 @@ function MitarbeiterInfo(id)
         setUser(data);
       })
       .catch(error => console.log(error));
-  }, [id.selectedItemId]);
+  }, [selectedItemId]);
 
   if (user && user.product && user.product.length > 0) {
     mitarbeiterDaten.update(user.product[0]);
@@ -59,5 +57,4 @@ function MitarbeiterInfo(id)
     </div>
   );
 }
-
 export default MitarbeiterInfo

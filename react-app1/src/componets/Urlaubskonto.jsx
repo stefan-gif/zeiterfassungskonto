@@ -9,7 +9,7 @@ function Urlaubskonto(id)
   let [urlaubsinfo, setUrlaubsinfo] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/zeiterfassungsDB/urlaub/${id.selectedItemId}`)
+    fetch(`${import.meta.env.VITE_Api_Server}/api/v1/zeiterfassungsDB/urlaub/${id.selectedItemId}`)
     .then(response => {
       if (!response.ok) {
         throw new Error("Network response was not ok");

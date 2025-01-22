@@ -32,7 +32,7 @@ class AufgabenNutzer {
     
     index = this.id[index];    
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/zeiterfassungsDB/delete/${index}`, {
+      const response = await fetch(`${import.meta.env.VITE_Api_Server}/api/v1/zeiterfassungsDB/delete/${index}`, {
         method: "DELETE"
       });
       if (!response.ok) {
@@ -48,7 +48,7 @@ class AufgabenNutzer {
   async createAufgabe(body){
 
     try{
-      axios.post('http://localhost:5000/api/v1/zeiterfassungsDB/create', body)
+      axios.post(`${import.meta.env.VITE_Api_Server}/api/v1/zeiterfassungsDB/create`, body)
       .then(response => console.log(response));  
     } catch (error){
       console.error ('error with the post: ', error);

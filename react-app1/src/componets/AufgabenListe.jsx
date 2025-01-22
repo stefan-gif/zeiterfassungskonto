@@ -11,7 +11,7 @@ function AufgabenListe({selectedItemId})
   const [aufgaben, setAufgaben] = useState();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/v1/zeiterfassungsDB/aufgabendaten/${selectedItemId}`)
+    fetch(`${import.meta.env.VITE_Api_Server}/api/v1/zeiterfassungsDB/aufgabendaten/${selectedItemId}`)
     .then(response => { 
       if (!response.ok) { 
         throw new Error("Network response was not ok"); 

@@ -18,7 +18,7 @@ function Header ({ setSelectedItemId }){
   const alleMitarbeit = new alleMitarbeiter();
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/v1/zeiterfassungsDB')
+    fetch(`${import.meta.env.VITE_Api_Server}/api/v1/zeiterfassungsDB`)
       .then(response => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
