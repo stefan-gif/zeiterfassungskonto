@@ -63,7 +63,7 @@ function Header ({ setSelectedItemId }){
           <Link to='/'>
             <button className='navi-button js-sprache'>Startseite</button>
           </Link>
-          <Link to='/mitarbeiter'>
+          <Link to={`/mitarbeiter/${selectedItemIdHeader}`}>
             <button className='navi-button js-sprache'>Mitarbeiter</button>
           </Link>
           <Link to='/zeit'>

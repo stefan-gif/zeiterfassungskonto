@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import '../assets/MeinUrlaubskonto.css';
 import 'js-circle-progress';
 import UrlaubsDaten from '../modules/Urlaubsdaten';
+import { Link } from'react-router-dom';
 
 function Urlaubskonto(id)
 { 
@@ -49,7 +50,7 @@ function Urlaubskonto(id)
     </div>
   </div>
     <div className="urlaubskonto-footer">
-        <a className='js-sprache' href="#">Urlaubsübersicht öffnen</a>
+        <Link className='js-sprache' to="./meinurlaub" state={{urlaubsDaten}}>Urlaubsübersicht öffnen</Link>
     </div>
 </div>
     </div>
