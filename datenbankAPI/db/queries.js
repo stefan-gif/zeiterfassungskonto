@@ -57,11 +57,11 @@ export const createAufgabe = async (nutzer_id, aufgabe) => {
   }
 };
 
-export const update = async (title, description, price,id) => {
-  const QUERY = "UPDATE products SET title = ?, description = ?, price = ? WHERE id = ?";
+export const update = async (vorname,nachname,telefon,email,id) => {
+  const QUERY = "UPDATE user SET vorname = ?, nachname = ?, telefon = ?, email = ? WHERE id = ?";
   try {
     const client = await pool.getConnection();
-    const result = await client.query(QUERY,[title, description, price,id]);
+    const result = await client.query(QUERY,[vorname,nachname,telefon,email,id]);
     return result[0];
   } catch (error) {
     console.log("Error executing create querry: ", error);

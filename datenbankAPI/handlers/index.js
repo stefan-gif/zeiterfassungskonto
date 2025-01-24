@@ -38,17 +38,17 @@ export const creatAufgaben = async (req, res) => {
   }
   
 };
-export const updateProduct = async (req, res) => {
-  const { title, description, price } = req.body;
+export const updateUser = async (req, res) => {
+  const { vorname,nachname,telefon,email } = req.body;
   const id = req.params.id;
 
-  if(!title || !description || !price){
+  if(!vorname || !nachname || !telefon ||!email){
     return res.status(400).json({ message: "All fields are required" });
   }
 
   try { 
-    const product = await update(title, description, price, id);
-    return res.status(201).json({ product });
+    const user = await update(vorname,nachname,telefon,email, id);
+    return res.status(201).json({ user });
     
   } catch (error) {
     console.log(error);
