@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 function MitarbeiterInfo({selectedItemId})
 { 
  
-  const [user, setUser] = useState(null);
   const [mitarbeiterDaten, setMitarbeiterDaten] = useState(new MitarbeiterDaten());
    
   useEffect(() => {    
@@ -18,7 +17,7 @@ function MitarbeiterInfo({selectedItemId})
         return response.json();
       })
       .then(data => {
-        setUser(data);
+        
         if(data && data.product && data.product.length > 0) {
           const updatedDaten = new MitarbeiterDaten();  
           updatedDaten.update(data.product[0]);
@@ -26,22 +25,21 @@ function MitarbeiterInfo({selectedItemId})
       }})
       .catch(error => console.log(error));
   }, [selectedItemId]);
-  
   return(
     <div className="info-item">
       <div className="profile-card">
-        <div className="image">{mitarbeiterDaten?.Bild}</div>
-        <p className="name">{mitarbeiterDaten?.Nachname}, {mitarbeiterDaten.Vorname}</p>
-        <p className="email">{mitarbeiterDaten?.Email}</p>
+        <div className="image">{mitarbeiterDaten?.bild}</div>
+        <p className="name">{mitarbeiterDaten?.nachname}, {mitarbeiterDaten.vorname}</p>
+        <p className="email">{mitarbeiterDaten?.email}</p>
 
         <div className="row">
             <div>
                 <div className="label js-sprache">Fachbereich</div>
-                <div className="value">{mitarbeiterDaten?.Abteilung}</div>
+                <div className="value">{mitarbeiterDaten?.abteilung}</div>
             </div>
             <div>
                 <div className="label js-sprache">Telefon</div>
-                <div className="value">{mitarbeiterDaten?.Telefon}</div>
+                <div className="value">{mitarbeiterDaten?.telefon}</div>
             </div>
         </div>
 
@@ -63,7 +61,7 @@ function MitarbeiterInfo({selectedItemId})
         <div className="edit-profile">
             <Link className="js-sprache" 
               to={`/mitarbeiter/${selectedItemId}`}
-              state={{mitarbeiterDaten}}
+              state={mitarbeiterDaten}
             >
               Profil bearbeiten
             </Link>

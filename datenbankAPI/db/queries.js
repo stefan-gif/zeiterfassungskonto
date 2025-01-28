@@ -1,7 +1,7 @@
 import {pool}  from './index.js'; 
 
 export const find = async () => {
-  const QUERY = "SELECT id,nachname,vorname FROM user";
+  const QUERY = "SELECT id,nachname,vorname,email,abteilung,telefon FROM user";
   let client;
   try {
     client = await pool.getConnection();

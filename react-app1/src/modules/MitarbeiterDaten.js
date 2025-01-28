@@ -2,20 +2,30 @@ import axios from 'axios';
 
 class MitarbeiterDaten {
   constructor() {
-    this.Bild = "bild";
-    this.Vorname = "vorname";
-    this.Nachname = "nachname";
-    this.Email = "email";
-    this.Abteilung = "abteilung";
-    this.Telefon = "telefon";
+    this.bild = "bild";
+    this.vorname = "vorname";
+    this.nachname = "nachname";
+    this.email = "email";
+    this.abteilung = "abteilung";
+    this.telefon = "telefon";
+    this.alledaten = [];  
   }
 
   update(data) {
-    this.Vorname = data.vorname;
-    this.Nachname = data.nachname;
-    this.Email = data.email;
-    this.Abteilung = data.abteilung;
-    this.Telefon = data.telefon;
+    this.vorname = data.vorname;
+    this.nachname = data.nachname;
+    this.email = data.email;
+    this.abteilung = data.abteilung;
+    this.telefon = data.telefon;
+  }
+
+  update2(data) {
+    this.email = data.email;
+    this.abteilung = data.abteilung;
+    this.vorname = data.vorname;
+    this.nachname = data.nachname;
+    this.id = data.id;
+    this.alledaten.push(data);
   }
   updatePut(selectedItemId,data) {
     axios.put(`${import.meta.env.VITE_Api_Server}/api/v1/zeiterfassungsDB/update/${selectedItemId}`, data)

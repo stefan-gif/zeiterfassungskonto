@@ -1,22 +1,24 @@
 import '../assets/header.css';
 import React, { useState,useEffect } from 'react';
-import alleMitarbeiter from '../modules/alleMitarbeiter.js';
 import {spracheDeutsch , spracheEnglisch} from '../script/sprachen.js';
 import { Link } from 'react-router-dom';
+import MitarbeiterDaten from '../modules/MitarbeiterDaten.js';
 
 function Header ({ setSelectedItemId }){
   
-
   const [selectedItemIdHeader, setSelectedItemIdHeader] = useState(null);
+  const [index, setIndex] = useState(null);
   let handleMitarbeiterinfo = (event) => {
-    const selectedId = parseInt(event.target.value, 10); 
+    const selectedId = parseInt(event.target.value, 10);
+    const selectedOption = event.target.selectedIndex;
     setSelectedItemIdHeader(selectedId);
     setSelectedItemId(selectedId);
+    setIndex(selectedOption);
   };
   
   let alledaten = [];
   const [user, setUser] = useState(null);
-  const alleMitarbeit = new alleMitarbeiter();
+  const alleMitarbeit = new MitarbeiterDaten();
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_Api_Server}/api/v1/zeiterfassungsDB`)
@@ -36,11 +38,11 @@ function Header ({ setSelectedItemId }){
     alledaten = [];
     let i = 0;
     user.user.forEach(element => {
-      alleMitarbeit.update(element);
+      alleMitarbeit.update2(element);
       alledaten = alleMitarbeit.alledaten;
       i++;
-    });      
-  }
+    });         
+  }  
 
   return(
     <header>
@@ -52,7 +54,11 @@ function Header ({ setSelectedItemId }){
           <button >???</button>
           <select value={selectedItemIdHeader || ""} onChange={handleMitarbeiterinfo} name="mitarbeiter" >
             {alledaten.map((element, index) => (
-              <option  value={element.id} key={index}>{element.nachname}, {element.vorname}</option>
+              <option  
+              value={element.id}
+              key={index}
+              data_index={index}
+              >{element.nachname}, {element.vorname}</option>
             ))}
           </select>
         </div>
@@ -63,7 +69,7 @@ function Header ({ setSelectedItemId }){
           <Link to='/'>
             <button className='navi-button js-sprache'>Startseite</button>
           </Link>
-          <Link to={`/mitarbeiter/${selectedItemIdHeader}`}>
+          <Link to={`/mitarbeiter/${selectedItemIdHeader}`} state={alledaten[index]}>
             <button className='navi-button js-sprache'>Mitarbeiter</button>
           </Link>
           <Link to='/zeit'>

@@ -8,7 +8,8 @@ function Mitarbeiter()
 {
   const { id } = useParams();
   const location = useLocation();
-  const { mitarbeiterDaten } = location.state || {}; 
+  const  mitarbeiterDaten  = location.state || {}; 
+  
   const [editMode, setEditMode] = useState({
     vorname: false,
     nachname: false,
@@ -16,12 +17,11 @@ function Mitarbeiter()
     telefon: false,
   });
   const [userData, setUserData] = useState({
-    vorname: mitarbeiterDaten?.Vorname,
-    nachname: mitarbeiterDaten?.Nachname,
-    email: mitarbeiterDaten?.Email,
-    telefon: mitarbeiterDaten?.Telefon 
+    vorname: mitarbeiterDaten?.vorname,
+    nachname: mitarbeiterDaten?.nachname,
+    email: mitarbeiterDaten?.email,
+    telefon: mitarbeiterDaten?.telefon 
   });
-  
   function speichern() {
     const mitarbeiter = new MitarbeiterDaten();
     mitarbeiter.updatePut(id, userData);
