@@ -1,8 +1,9 @@
-import { useLocation } from "react-router-dom";
+import { useLocation,useParams } from "react-router-dom";
 function MeinUrlaub(){
   const location = useLocation();
+  const { id } = useParams();
   const { urlaubsDaten } = location.state || {}; 
-
+  console.log(id);
   return(
     <div>
         <h3>Urlaubsübersicht</h3>

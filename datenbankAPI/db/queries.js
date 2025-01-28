@@ -2,13 +2,16 @@ import {pool}  from './index.js';
 
 export const find = async () => {
   const QUERY = "SELECT id,nachname,vorname FROM user";
+  let client;
   try {
-    const client = await pool.getConnection();
+    client = await pool.getConnection();
     const result = await client.query(QUERY);
     return result[0];
   } catch (error) {
     console.log("Error executing query: ", error);
     throw error;
+  } finally {
+    if (client) client.release();
   }
 };
 
@@ -59,24 +62,30 @@ export const createAufgabe = async (nutzer_id, aufgabe) => {
 
 export const update = async (vorname,nachname,telefon,email,id) => {
   const QUERY = "UPDATE user SET vorname = ?, nachname = ?, telefon = ?, email = ? WHERE id = ?";
+  let client;
   try {
-    const client = await pool.getConnection();
+    client = await pool.getConnection();
     const result = await client.query(QUERY,[vorname,nachname,telefon,email,id]);
     return result[0];
   } catch (error) {
     console.log("Error executing create querry: ", error);
     throw error;
+  }finally {
+    if (client) client.release();
   }
 };
 
 export const deleteAufgabe = async (id) => {
   const QUERY = "delete from aufgaben where id = ?";
+  let client;
   try {
-    const client = await pool.getConnection();
+    client = await pool.getConnection();
     await client.query(QUERY,id);   
   } catch (error) {
     console.log("Error executing create querry: ", error);
     throw error;
+  }finally {
+    if (client) client.release();
   }
 };
 
