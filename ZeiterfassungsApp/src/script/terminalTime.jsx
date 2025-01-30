@@ -1,6 +1,7 @@
 import axios from "axios";
 
 function theTime() {
+  console.log("Zeit wird berechnet...");
   let date = new Date();
   let stunden = date.getHours().toString().padStart(2, "0");
   let minuten = date.getMinutes().toString().padStart(2, "0");

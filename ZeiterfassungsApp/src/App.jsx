@@ -13,6 +13,7 @@ import MeinUrlaub from './componets/MeinUrlaub.jsx';
 function App() {
 
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const [timeSaldo,setTimeSaldo] = useState(0);
 
   return(
     <>

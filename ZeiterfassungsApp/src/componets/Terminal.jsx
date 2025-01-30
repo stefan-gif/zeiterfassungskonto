@@ -2,6 +2,7 @@ import '../assets/Terminale.css';
 import { atHome,atWork } from '../script/terminal';
 import { theTime } from '../script/terminalTime';
 import { Link } from'react-router-dom';
+import {  useEffect } from'react';
 
 function Terminal()
 {
@@ -9,9 +10,10 @@ function Terminal()
   let stunden = date.getHours().toString().padStart(2, "0");
   let minuten = date.getMinutes().toString().padStart(2, "0");
   let time = stunden + ":" + minuten;
-  window.onload = function() {
-    setInterval(theTime, 1000);
-  };
+  useEffect(() => {
+    console.log("Hallo!");
+    setInterval(theTime, 10000);
+  }, []);
   
 
   return(

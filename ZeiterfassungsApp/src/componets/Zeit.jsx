@@ -1,5 +1,5 @@
 import * as React from "react";
-import { berechneMonatlicheArbeitszeit,getFeiertage } from "../script/terminalTime";
+import { berechneMonatlicheArbeitszeit } from "../script/terminalTime";
 import '../assets/zeit.css';
 import {
   createColumnHelper,
