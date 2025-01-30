@@ -1,6 +1,6 @@
 import '../assets/header.css';
 import React, { useState,useEffect } from 'react';
-import {spracheDeutsch , spracheEnglisch} from '../script/sprachen.js';
+import {spracheDeutsch , spracheEnglisch} from '../script/sprachen.jsx';
 import { Link } from 'react-router-dom';
 import MitarbeiterDaten from '../modules/MitarbeiterDaten.js';
 

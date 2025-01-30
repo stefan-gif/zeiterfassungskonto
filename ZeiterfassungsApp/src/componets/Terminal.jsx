@@ -1,6 +1,7 @@
 import '../assets/Terminale.css';
 import { atHome,atWork } from '../script/terminal';
 import { theTime } from '../script/terminalTime';
+import { Link } from'react-router-dom';
 
 function Terminal()
 {
@@ -51,7 +52,7 @@ function Terminal()
     <button className="control-btn stop">⏹️</button>
   </div>
   <div className="footer">
-      <a className="footer-link js-sprache" href="#">Übersicht erfasste Zeiten</a>
+      <Link className="footer-link js-sprache" to='./zeit'>Übersicht erfasste Zeiten</Link>
   </div>
 </div>
       </div>

@@ -1,4 +1,4 @@
-import urlaubsinfo  from './urlaubsinfo.js';
+import urlaubsinfo  from './urlaubsinfo.jsx';
 
 const deutsch = ["Zeiterfassungssoftware", "Startseite", "Mitarbeiter", "Zeit", "Anwesenheitsdisplay", "Kalender", "Ampelkonto", "Zeierfassung", "Fachbereich","Telefon","Reiseantrag","Urlaubsantrag","Meine Zeiten","Meine Bewertungen","Profil bearbeiten","Meine Aufgaben","Aufgaben Übersicht öffnen","Mein Urlaubskonto",`Urlaubsanspruch: <strong>${urlaubsinfo.Urlaubsanspruch}</strong>`,`Urlaub genommen: <strong>${urlaubsinfo.UrlaubGenommen}`,`Urlaub geplant: <strong>${urlaubsinfo.UrlaubGeplant}`,`Resturlaub (inkl. Planung): <strong>${urlaubsinfo.Resturlaub}</strong>`, "Urlaubsübersicht öffnen","Terminal","Zusatzeingabe auswählen","Planungsgruppe","Übersicht erfasste Zeiten","Zeitkonto","Saldo"];
 
