@@ -1,7 +1,6 @@
 import axios from "axios";
 
 function theTime() {
-  console.log("Zeit wird berechnet...");
   let date = new Date();
   let stunden = date.getHours().toString().padStart(2, "0");
   let minuten = date.getMinutes().toString().padStart(2, "0");
@@ -56,4 +55,21 @@ async function getFeiertage(jahr){
   } 
   return feiertage;
 }
-export { theTime, berechneMonatlicheArbeitszeit, getFeiertage };
+
+async function timeStart() {
+  console.log("Time started");
+}
+export { theTime, berechneMonatlicheArbeitszeit, getFeiertage, timeStart };
+
+export async function getTimeStamp(){
+  try {
+    const response = await axios.get('http://localhost:5000/api/v1/zeiterfassungsDB/zeitkonto/1');
+    console.log(response.data);
+    if(response.data.length > 0){
+      return true;
+    }else return false;
+  } 
+  catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}

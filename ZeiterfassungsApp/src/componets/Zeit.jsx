@@ -9,8 +9,10 @@ import {
 } from "@tanstack/react-table";
 
 const monatsZeit = await berechneMonatlicheArbeitszeit();
+
 const monate = [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ];
 let timeData = [];
+
 monate.forEach((monat) => {
   timeData.push({ 
     Monat: monat,

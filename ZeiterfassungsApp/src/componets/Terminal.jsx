@@ -1,21 +1,36 @@
 import '../assets/Terminale.css';
 import { atHome,atWork } from '../script/terminal';
-import { theTime } from '../script/terminalTime';
+import { theTime, getTimeStamp } from '../script/terminalTime';
 import { Link } from'react-router-dom';
 import {  useEffect } from'react';
+import { useStopwatch } from'react-timer-hook';
 
 function Terminal()
-{
+{  
   let date = new Date();
   let stunden = date.getHours().toString().padStart(2, "0");
   let minuten = date.getMinutes().toString().padStart(2, "0");
   let time = stunden + ":" + minuten;
   useEffect(() => {
-    console.log("Hallo!");
     setInterval(theTime, 10000);
   }, []);
-  
 
+  const {    
+    minutes,
+    hours,    
+    start,
+    pause,
+    reset,
+  } = useStopwatch();
+  let zeit = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+  console.log(zeit);
+  
+  const testfunktion = async() => {
+    const timestamp = await getTimeStamp();
+    if (!timestamp) {
+      console.log("Timestamp nicht vorhanden");
+    } 
+  };
   return(
       
       <div className="info-item">
@@ -35,7 +50,7 @@ function Terminal()
           <button onClick={atHome} className="icon-btn home ">🏠</button>
     </div>
     <div className="additional-buttons">
-        <button className="extra-btn">🔔</button>
+        <button  className="extra-btn">🔔</button>
         <button className="extra-btn">⚙️</button>
     </div>
     </div>
@@ -49,9 +64,13 @@ function Terminal()
     </select>
   </div>
   <div className="controls">
-    <button className="control-btn start js-start">⏺️</button>
-    <button className="control-btn pause">⏸️</button>
-    <button className="control-btn stop">⏹️</button>
+    <button className="control-btn start js-start"  onClick={()=>{
+      start();
+      testfunktion();
+    }}
+    >▶</button>
+    <button className="control-btn pause" onClick={pause}>⏸️</button>
+    <button className="control-btn stop" onClick={() => reset(undefined,false)}>⏹️</button>
   </div>
   <div className="footer">
       <Link className="footer-link js-sprache" to='./zeit'>Übersicht erfasste Zeiten</Link>

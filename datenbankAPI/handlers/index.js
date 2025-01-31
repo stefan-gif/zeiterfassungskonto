@@ -1,4 +1,4 @@
-import { find,createAufgabe,findById, update, findUrlaubById, findAufgabeById, findAufgabenDatenById,deleteAufgabe } from "../db/queries.js";
+import { find,createAufgabe,findById, update, findUrlaubById, findAufgabeById, findAufgabenDatenById,deleteAufgabe, createTagesZeitKonto, findTagesZeitKontoById } from "../db/queries.js";
 
 export const getAllUser = async (req, res) => {
   try {
@@ -29,7 +29,7 @@ export const creatAufgaben = async (req, res) => {
   }
 
   try { 
-    const product = await createAufgabe(nutzer_id,aufgabe);
+    await createAufgabe(nutzer_id,aufgabe);
     return res.status(201).json({ aufgabe });
     
   } catch (error) {
@@ -101,4 +101,33 @@ try {
   console.log(error);
   res.status(500).json({ message: "Internal server error" });
 }
+};
+
+export const creatTagesKonto = async (req, res) => {
+  const { nutzer_id } = req.body;
+
+  if(!nutzer_id ){
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  try { 
+    await createTagesZeitKonto(nutzer_id); 
+    return res.status(201).json({ tagesZeitKonto: "Erfolgreich erstellt" });   
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+  
+};
+
+export const getTagesKonto = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const tagesZeitKonto = await findTagesZeitKontoById(id);
+    return res.status(200).json( tagesZeitKonto );
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };

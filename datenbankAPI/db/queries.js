@@ -118,3 +118,32 @@ export const findAufgabenDatenById = async (nutzer_id) => {
     if (client) client.release(); 
   }
 };
+
+export const createTagesZeitKonto = async (nutzer_id) => {
+  const  QUERY = "INSERT INTO tageszeitkonto (nutzer_id,minuten) VALUES (?,0)";
+  let client;
+  try {
+    client = await pool.getConnection();
+    await client.query(QUERY, [nutzer_id]);
+  }catch (error) {
+    console.log("Error executing create querry: ", error);
+    throw error;
+  } finally {
+    if (client) client.release();
+  }
+}
+
+export const findTagesZeitKontoById = async (nutzer_id) => {
+  const QUERY = "SELECT minuten FROM tageszeitkonto WHERE nutzer_id =? and timestamp = CURDATE()";
+  let client;
+  try {
+    client = await pool.getConnection();
+    const result = await client.query(QUERY, [nutzer_id]);
+    return result[0];
+  } catch (error) {
+    console.log("Error executing query by id: ", error);
+    throw error;
+  } finally {
+    if (client) client.release(); 
+  }
+};
