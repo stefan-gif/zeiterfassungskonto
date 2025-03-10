@@ -15,7 +15,7 @@ function MainBody({selectedItemId}) {
       </div>
 
       <div className="info-row">
-        <Terminal />
+        <Terminal selectedItemId={selectedItemId}/>
         <Zeitkonto />
         <Kalender />
       </div>

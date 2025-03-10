@@ -1,11 +1,11 @@
 import '../assets/Terminale.css';
 import { atHome,atWork } from '../script/terminal';
-import { theTime, getTimeStamp } from '../script/terminalTime';
+import { theTime, getTimeStamp,createTagesZeitKonto } from '../script/terminalTime';
 import { Link } from'react-router-dom';
 import {  useEffect } from'react';
 import { useStopwatch } from'react-timer-hook';
 
-function Terminal()
+function Terminal({selectedItemId})
 {  
   let date = new Date();
   let stunden = date.getHours().toString().padStart(2, "0");
@@ -26,10 +26,14 @@ function Terminal()
   console.log(zeit);
   
   const testfunktion = async() => {
-    const timestamp = await getTimeStamp();
+    const timestamp = await getTimeStamp(selectedItemId);
+    console.log(selectedItemId);
     if (!timestamp) {
-      console.log("Timestamp nicht vorhanden");
-    } 
+      console.log("Timestamp nicht vorhanden, neuer muss erstellt werden");
+      createTagesZeitKonto(selectedItemId,0);
+    } else {
+      console.log("Timestamp vorhanden");
+    }
   };
   return(
       

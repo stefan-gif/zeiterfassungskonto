@@ -61,13 +61,22 @@ async function timeStart() {
 }
 export { theTime, berechneMonatlicheArbeitszeit, getFeiertage, timeStart };
 
-export async function getTimeStamp(){
+export async function getTimeStamp(selectedItemId){
   try {
-    const response = await axios.get('http://localhost:5000/api/v1/zeiterfassungsDB/zeitkonto/1');
-    console.log(response.data);
+    const response = await axios.get('http://localhost:5000/api/v1/zeiterfassungsDB/zeitkonto/' + selectedItemId);
     if(response.data.length > 0){
       return true;
     }else return false;
+  } 
+  catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+export async function createTagesZeitKonto(nutzer_id, minuten){
+  try {
+    const response = await axios.post('http://localhost:5000/api/v1/zeiterfassungsDB/zeitkonto/create', {nutzer_id, minuten});
+    console.log(response.data);
   } 
   catch (error) {
     console.error('Error fetching data:', error);
