@@ -147,3 +147,18 @@ export const findTagesZeitKontoById = async (nutzer_id) => {
     if (client) client.release(); 
   }
 };
+
+export const updateTagesZeitKonto = async (minuten, nutzer_id) => {
+  const QUERY = "UPDATE tageszeitkonto SET minuten = ? WHERE nutzer_id = ? and timestamp = CURDATE()";
+  let client;
+  try {
+    client = await pool.getConnection();
+    const result = await client.query(QUERY,[minuten,nutzer_id]);
+    return result[0];
+  } catch (error) {
+    console.log("Error executing create querry: ", error);
+    throw error;
+  }finally {
+    if (client) client.release();
+  }
+};

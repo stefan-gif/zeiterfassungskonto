@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { creatAufgaben, creatTagesKonto, deletetask, getAllUser,  getAufgaben,  getAufgabenDaten,  getUser, getUserUrlaub, updateUser,getTagesKonto } from '../handlers/index.js';
+import { creatAufgaben, creatTagesKonto, deletetask, getAllUser,  getAufgaben,  getAufgabenDaten,  getUser, getUserUrlaub, updateUser,getTagesKonto,updateTagesKonto } from '../handlers/index.js';
 
 const appRouter = Router();
 
@@ -10,8 +10,9 @@ appRouter.put("/update/:id",updateUser);
 appRouter.delete("/delete/:id",deletetask);
 appRouter.get("/urlaub/:id",getUserUrlaub);
 appRouter.get("/aufgaben/:id",getAufgaben);
-appRouter.get("/aufgabendaten/:id",getAufgabenDaten)
-appRouter.post("/zeitkonto/create", creatTagesKonto)
-appRouter.get("/zeitkonto/:id", getTagesKonto)
+appRouter.get("/aufgabendaten/:id",getAufgabenDaten);
+appRouter.post("/zeitkonto/create", creatTagesKonto);
+appRouter.get("/zeitkonto/:id", getTagesKonto);
+appRouter.put("/zeitkonto/update/:id", updateTagesKonto);
 
 export default appRouter;

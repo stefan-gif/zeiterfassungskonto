@@ -1,4 +1,4 @@
-import { find,createAufgabe,findById, update, findUrlaubById, findAufgabeById, findAufgabenDatenById,deleteAufgabe, createTagesZeitKonto, findTagesZeitKontoById } from "../db/queries.js";
+import { find,createAufgabe,findById, update, findUrlaubById, findAufgabeById, findAufgabenDatenById,deleteAufgabe, createTagesZeitKonto, findTagesZeitKontoById, updateTagesZeitKonto } from "../db/queries.js";
 
 export const getAllUser = async (req, res) => {
   try {
@@ -131,3 +131,21 @@ export const getTagesKonto = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const updateTagesKonto = async (req, res) => {
+  const { minuten } = req.body;
+  const id = req.params.id;
+
+  if(!minuten){
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  try { 
+    const tagesZeitKonto = await updateTagesZeitKonto(minuten, id);
+    return res.status(201).json({ tagesZeitKonto });
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
