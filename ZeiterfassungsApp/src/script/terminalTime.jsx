@@ -82,3 +82,13 @@ export async function createTagesZeitKonto(nutzer_id, minuten){
     console.error('Error fetching data:', error);
   }
 }
+
+export async function updateTagesZeitKonto(minuten, id){
+  try {
+    const response = await axios.put('http://localhost:5000/api/v1/zeiterfassungsDB/zeitkonto/update/' + id, {minuten});
+    console.log(response.data);
+  } 
+  catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}

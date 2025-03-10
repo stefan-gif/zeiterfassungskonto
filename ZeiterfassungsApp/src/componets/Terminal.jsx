@@ -1,6 +1,6 @@
 import '../assets/Terminale.css';
 import { atHome,atWork } from '../script/terminal';
-import { theTime, getTimeStamp,createTagesZeitKonto } from '../script/terminalTime';
+import { theTime, getTimeStamp,createTagesZeitKonto,updateTagesZeitKonto } from '../script/terminalTime';
 import { Link } from'react-router-dom';
 import {  useEffect } from'react';
 import { useStopwatch } from'react-timer-hook';
@@ -22,18 +22,21 @@ function Terminal({selectedItemId})
     pause,
     reset,
   } = useStopwatch();
-  let zeit = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-  console.log(zeit);
-  
+
+  let zeit = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;  
+
   const testfunktion = async() => {
     const timestamp = await getTimeStamp(selectedItemId);
     console.log(selectedItemId);
     if (!timestamp) {
-      console.log("Timestamp nicht vorhanden, neuer muss erstellt werden");
       createTagesZeitKonto(selectedItemId,0);
-    } else {
-      console.log("Timestamp vorhanden");
-    }
+    } 
+  };
+
+  const zeitSpeichern = async() => {
+    let minutesPara = minutes+hours*60;
+    console.log(minutesPara);
+    await updateTagesZeitKonto(minutesPara,selectedItemId);
   };
   return(
       
@@ -74,7 +77,10 @@ function Terminal({selectedItemId})
     }}
     >▶</button>
     <button className="control-btn pause" onClick={pause}>⏸️</button>
-    <button className="control-btn stop" onClick={() => reset(undefined,false)}>⏹️</button>
+    <button className="control-btn stop" onClick={() => {
+      reset(undefined,false);
+      zeitSpeichern();            
+    }}>⏹️</button>
   </div>
   <div className="footer">
       <Link className="footer-link js-sprache" to='./zeit'>Übersicht erfasste Zeiten</Link>

@@ -149,7 +149,7 @@ export const findTagesZeitKontoById = async (nutzer_id) => {
 };
 
 export const updateTagesZeitKonto = async (minuten, nutzer_id) => {
-  const QUERY = "UPDATE tageszeitkonto SET minuten = ? WHERE nutzer_id = ? and timestamp = CURDATE()";
+  const QUERY = "UPDATE tageszeitkonto SET minuten = minuten + ? WHERE nutzer_id = ? and timestamp = CURDATE()";
   let client;
   try {
     client = await pool.getConnection();
