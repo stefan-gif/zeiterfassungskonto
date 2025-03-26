@@ -33,8 +33,10 @@ function Zeit({selectedItemId}) {
     };
     fetchArbeitszeit();
   }, [monatsArbeitsZeit]);  
-  const monate = [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ];
-    
+  let monate = [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ];
+  let newDate = new Date();
+  monate = monate.slice(0,newDate.getMonth() + 1);
+  
   React.useEffect(() => {
     let updatedTimeData = [];
     monate.forEach((monat,key) => {
