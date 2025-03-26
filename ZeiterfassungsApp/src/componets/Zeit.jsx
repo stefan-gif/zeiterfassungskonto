@@ -1,5 +1,5 @@
 import * as React from "react";
-import { berechneMonatlicheArbeitszeit } from "../script/terminalTime";
+import { berechneMonatlicheArbeitszeit, getMonatsArbeitszeiten, monatsArbeitsZeitUmrechnen } from "../script/terminalTime";
 import '../assets/zeit.css';
 import {
   createColumnHelper,
@@ -8,58 +8,82 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-const monatsZeit = await berechneMonatlicheArbeitszeit();
 
-const monate = [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ];
-let timeData = [];
 
-monate.forEach((monat) => {
-  timeData.push({ 
-    Monat: monat,
-    MonatsArbeitsZeit: monatsZeit[monat] || 0,
-    ArbeitsZeit: 9,
-    Saldo: '',
-  });
-});
 
-const columnHelper = createColumnHelper();
+function Zeit({selectedItemId}) {
+  
+  let [monatsZeit, setMonatsZeit] = React.useState({});  
+  let [monatsArbeitsZeit, setMonatsArbeitsZeit] = React.useState({});
+  let [arbeitsZeit, setArbeitsZeit] = React.useState({});
 
-const columns = [
-  columnHelper.accessor("Monat", {
-    cell: (info) => info.getValue(),
-    header: () => <span>Monat</span>,
-    footer: () => '',
-  }),
-  columnHelper.accessor("MonatsArbeitsZeit", {
-    id: "MonatsArbeitsZeit",
-    cell: (info) => <i>{info.getValue()}</i>,
-    header: () => <span>Monats Arbeitszeit</span>,
-    footer: (info) => 
-      info.table.getFilteredRowModel()
-     .rows.reduce((sum, row) => sum + row.original.MonatsArbeitsZeit, 0)
-  }),
-  columnHelper.accessor("ArbeitsZeit", {
-    header: () => <span> Arbeitszeit</span>,
-    cell: (info) => info.getValue(),
-    footer: (info) => 
-      info.table.getFilteredRowModel()
-     .rows.reduce((sum, row) => sum + row.original.ArbeitsZeit, 0)
-  }),
-  columnHelper.accessor("Saldo", {
-    header: () => <span>Saldo</span>,
-    cell: (info) => {
-      const row = info.row.original;
-      return row.MonatsArbeitsZeit - row.ArbeitsZeit;
-    },      
-    footer: (info) => {
-      return info.table.getFilteredRowModel()
-      .rows.reduce((sum, row) => sum + (row.original.MonatsArbeitsZeit - row.original.ArbeitsZeit), 0)
-    }      
-  })
-];
+  React.useEffect(()  => {
+    const fetchData = async () => {
+      setMonatsZeit(await berechneMonatlicheArbeitszeit());
+      setMonatsArbeitsZeit(await getMonatsArbeitszeiten(selectedItemId));
+    };
+      fetchData();
+    }, 
+    [selectedItemId]);
 
-function Zeit() {
-  const [data, _setData] = React.useState(() => [...timeData]);
+  React.useEffect(() => {
+    const fetchArbeitszeit = async () => {
+      const zeit = await monatsArbeitsZeitUmrechnen(monatsArbeitsZeit);
+      setArbeitsZeit(zeit);
+    };
+    fetchArbeitszeit();
+  }, [monatsArbeitsZeit]);  
+  const monate = [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ];
+    
+  React.useEffect(() => {
+    let updatedTimeData = [];
+    monate.forEach((monat,key) => {
+      updatedTimeData.push({ 
+        Monat: monat,
+        MonatsArbeitsZeit: monatsZeit[monat] || 0,
+        ArbeitsZeit: arbeitsZeit[key],
+        Saldo: '',
+      });
+    });
+    _setData(updatedTimeData);
+  }, [monatsZeit, arbeitsZeit]);
+
+  const columnHelper = createColumnHelper();
+
+  const columns = [
+    columnHelper.accessor("Monat", {
+      cell: (info) => info.getValue(),
+      header: () => <span>Monat</span>,
+      footer: () => '',
+    }),
+    columnHelper.accessor("MonatsArbeitsZeit", {
+      id: "MonatsArbeitsZeit",
+      cell: (info) => <i>{info.getValue()}</i>,
+      header: () => <span>Monats Arbeitszeit</span>,
+      footer: (info) => 
+        info.table.getFilteredRowModel()
+      .rows.reduce((sum, row) => sum + row.original.MonatsArbeitsZeit, 0)
+    }),
+    columnHelper.accessor("ArbeitsZeit", {
+      header: () => <span> Arbeitszeit</span>,
+      cell: (info) => info.getValue(),
+      footer: (info) => 
+        info.table.getFilteredRowModel()
+      .rows.reduce((sum, row) => sum + row.original.ArbeitsZeit, 0)
+    }),
+    columnHelper.accessor("Saldo", {
+      header: () => <span>Saldo</span>,
+      cell: (info) => {
+        const row = info.row.original;
+        return row.MonatsArbeitsZeit - row.ArbeitsZeit;
+      },      
+      footer: (info) => {
+        return info.table.getFilteredRowModel()
+        .rows.reduce((sum, row) => sum + (row.original.MonatsArbeitsZeit - row.original.ArbeitsZeit), 0)
+      }      
+    })
+  ];
+  const [data, _setData] = React.useState([]);
 
   const table = useReactTable({
     data,

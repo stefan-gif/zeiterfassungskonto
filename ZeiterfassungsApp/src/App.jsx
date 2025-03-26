@@ -21,7 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainBody selectedItemId={selectedItemId}/>}/>
         <Route path="/mitarbeiter/:id" element={<Mitarbeiter />}/>
-        <Route path="/zeit" element={<Zeit />}/>
+        <Route path="/zeit" element={<Zeit selectedItemId={selectedItemId} />}/>
         <Route path="/anwesenheit" element={< Anwesenheit/>}/>
         <Route path="/kalender" element={< MeinKalender/>}/>
         <Route path="/ampelkonto" element={<Ampelkonto/>}/>

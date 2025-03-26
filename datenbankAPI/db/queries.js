@@ -162,3 +162,18 @@ export const updateTagesZeitKonto = async (minuten, nutzer_id) => {
     if (client) client.release();
   }
 };
+
+export const findMonatsArbeitszeitenById = async (nutzer_id) => {
+  const QUERY = "SELECT DATE_FORMAT(timestamp, '%Y-%m') as monat, sum(minuten) as minuten FROM tageszeitkonto WHERE nutzer_id = ? GROUP BY monat ORDER BY monat";
+  let client;
+  try {
+    client = await pool.getConnection();
+    const result = await client.query(QUERY, [nutzer_id]);
+    return result[0];
+  } catch (error) {
+    console.log("Error executing query by id: ", error);
+    throw error;
+  } finally {
+    if (client) client.release(); 
+  }
+};

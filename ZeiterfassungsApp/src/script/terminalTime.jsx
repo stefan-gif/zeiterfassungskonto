@@ -92,3 +92,25 @@ export async function updateTagesZeitKonto(minuten, id){
     console.error('Error fetching data:', error);
   }
 }
+
+export async function getMonatsArbeitszeiten(id){
+  try {
+    const response = await axios.get('http://localhost:5000/api/v1/zeiterfassungsDB/zeitkonto/alle/' + id);
+    return response.data;
+  } 
+  catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+export async function monatsArbeitsZeitUmrechnen(monatsArbeitsZeit){
+  let stundenreturn = [];
+  Object.keys(monatsArbeitsZeit).forEach(key => {
+    const minuten = monatsArbeitsZeit[key].minuten;
+    const stunden = Math.floor(minuten / 60);
+    const restMinuten = Math.floor(minuten % 60);
+    const zeitAnzeige = `${stunden.toString().padStart(2, '0')}:${restMinuten.toString().padStart(2, '0')}`;
+    stundenreturn.push(stunden);
+  });
+  return stundenreturn;
+};
