@@ -1,6 +1,6 @@
 #  Zeiterfassungskonto  
 **Web‑Anwendung zur Erfassung und Verwaltung von Arbeitszeiten**  
-*Projekt im Rahmen der Ausbildung zum Fachinformatiker für Anwendungsentwicklung – noch in Entwicklung*
+*Projekt im Rahmen der Ausbildung zum Fachinformatiker für Anwendungsentwicklung*
 
 ---
 
