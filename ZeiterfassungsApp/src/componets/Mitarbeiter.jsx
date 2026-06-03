@@ -56,6 +56,3 @@ function Mitarbeiter()
 
 export default Mitarbeiter;
 
-// {
-//   Object.keys(mitarbeiterDaten).map((data,index) => (<li key={index}>{data}: {mitarbeiterDaten[data]}</li>))
-// }

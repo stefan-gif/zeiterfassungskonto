@@ -63,7 +63,7 @@ export { theTime, berechneMonatlicheArbeitszeit, getFeiertage, timeStart };
 
 export async function getTimeStamp(selectedItemId){
   try {
-    const response = await axios.get('http://localhost:5000/api/v1/zeiterfassungsDB/zeitkonto/' + selectedItemId);
+    const response = await axios.get(`${import.meta.env.VITE_Api_Server}/api/v1/zeiterfassungsDB/zeitkonto/` + selectedItemId);
     if(response.data.length > 0){
       return true;
     }else return false;
@@ -75,7 +75,7 @@ export async function getTimeStamp(selectedItemId){
 
 export async function createTagesZeitKonto(nutzer_id, minuten){
   try {
-    const response = await axios.post('http://localhost:5000/api/v1/zeiterfassungsDB/zeitkonto/create', {nutzer_id, minuten});
+    const response = await axios.post(`${import.meta.env.VITE_Api_Server}/api/v1/zeiterfassungsDB/zeitkonto/create`, {nutzer_id, minuten});
     console.log(response.data);
   } 
   catch (error) {
@@ -85,7 +85,7 @@ export async function createTagesZeitKonto(nutzer_id, minuten){
 
 export async function updateTagesZeitKonto(minuten, id){
   try {
-    const response = await axios.put('http://localhost:5000/api/v1/zeiterfassungsDB/zeitkonto/update/' + id, {minuten});
+    const response = await axios.put(`${import.meta.env.VITE_Api_Server}/api/v1/zeiterfassungsDB/zeitkonto/update/` + id, {minuten});
     console.log(response.data);
   } 
   catch (error) {
@@ -95,7 +95,7 @@ export async function updateTagesZeitKonto(minuten, id){
 
 export async function getMonatsArbeitszeiten(id){
   try {
-    const response = await axios.get('http://localhost:5000/api/v1/zeiterfassungsDB/zeitkonto/alle/' + id);
+    const response = await axios.get(`${import.meta.env.VITE_Api_Server}/api/v1/zeiterfassungsDB/zeitkonto/alle/` + id);
     return response.data;
   } 
   catch (error) {
